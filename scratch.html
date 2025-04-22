@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Scratch Page | Basketball Passion</title>
+
+  <!-- Bootstrap (optional for grid/components) -->
+  <link href="css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Your custom scratch page styles -->
+  <link href="css/custom2.css" rel="stylesheet"/>
+</head>
+<body>
+  <!-- NAVIGATION BACK -->
+  <nav class="navbar navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">← Back to Home</a>
+    </div>
+  </nav>
+
+  <!-- 1) Nested List Section -->
+  <div class="list-container">
+    <h2>My Basketball Favorites</h2>
+    <ol>
+      <li>Favorite Teams
+        <ul>
+          <li>Los Angeles Lakers</li>
+          <li>Golden State Warriors</li>
+          <li>Brooklyn Nets</li>
+        </ul>
+      </li>
+      <li>Favorite Players
+        <ul>
+          <li>LeBron James</li>
+          <li>Stephen Curry</li>
+          <li>Kevin Durant</li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+
+  <!-- 2) Personal Image -->
+  <div class="image-section">
+    <img src="https://nbcsports.brightspotcdn.com/dims4/default/45f2d3a/2147483647/strip/false/crop/2916x1640+0+0/resize/1486x836!/quality/90/?url=https%3A%2F%2Fnbc-sports-production-nbc-sports.s3.us-east-1.amazonaws.com%2Fbrightspot%2F44%2Fef%2F2dc745d9e60683818039ca029fdf%2Fap-101206125847-e1527112035702.jpg" alt="Basketball action shot"/>
+  </div>
+
+  <!-- 3) Embedded YouTube Video -->
+  <div class="video-container">
+    <iframe 
+    <iframe width="1184" height="666" src="https://www.youtube.com/embed/H_TapNgp_rQ" title="Dwyane Wade to LeBron James" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </iframe>
+  </div>
+
+  <!-- 4) On‑page Anchor -->
+  <p class="text-center">
+    <a href="#tableau">Jump to Tableau Visualization ↓</a>
+  </p>
+
+  <!-- 5) Tableau Embed -->
+  <h2 id="tableau" class="text-center">Live Tableau Visualization</h2>
+
+  <!-- the container that will hold your viz -->
+  <div id="vizContainer" class="tableau-container"></div>
+
+  <!-- Tableau JS API -->
+  <script type="text/javascript" src="https://public.tableau.com/javascripts/api/tableau-2.min.js"></script>
+  <script type="text/javascript">
+    // 1) grab the container div
+    var containerDiv = document.getElementById("vizContainer");
+    // 2) point to the /views URL (not /app/profile)
+    var url = "https://public.tableau.com/views/WebTrafficDashboardRedesign/Cockpit";
+    // 3) options: hide tabs, show toolbar
+    var options = {
+      hideTabs: true,
+      hideToolbar: false,
+      width: "100%",
+      height: "800px"
+    };
+    // 4) actually embed it
+    new tableau.Viz(containerDiv, url, options);
+  </script>
+
+  <!-- Link to your Web App -->
+  <div class="text-center my-4">
+    <a class="btn btn-primary" href="webapp.html">Try the Riddle Generator →</a>
+  </div>
+
+  <footer class="text-center py-3">
+    <small>&copy; 2025 David Hunt</small>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Riddle Generator</title>
+
+  <!-- Bootstrap theme -->
+  <link href="css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Optional: Roboto font for consistency -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    /* Inline CSS for the Riddle Generator page */
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 0;
+    }
+    .card {
+      max-width: 600px;
+      margin: 2rem auto;
+      border-radius: 8px;
+    }
+    #riddle {
+      font-size: 1.25rem;
+      min-height: 3em;
+    }
+    #feedback.correct {
+      color: green;
+    }
+    #feedback.incorrect {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation back to scratch page -->
+  <nav class="navbar navbar-light bg-light shadow-sm">
+    <div class="container">
+      <a class="navbar-brand" href="scratch.html">← Back to Scratch Page</a>
+    </div>
+  </nav>
+
+  <div class="container">
+    <h2 class="text-center my-4">Riddle Generator</h2>
+    <div class="card p-4 shadow-sm">
+      <!-- Riddle display -->
+      <p id="riddle" class="lead text-center">Click “New Riddle” to begin!</p>
+
+      <!-- New Riddle button -->
+      <div class="d-grid mb-3">
+        <button id="newRiddle" class="btn btn-primary">New Riddle</button>
+      </div>
+
+      <!-- Answer input & submit -->
+      <div id="answerSection" style="display:none;">
+        <input
+          type="text"
+          id="answerInput"
+          class="form-control mb-2"
+          placeholder="Type your answer here..."
+        />
+        <div class="d-grid mb-3">
+          <button id="submitAnswer" class="btn btn-success">Submit Answer</button>
+        </div>
+      </div>
+
+      <!-- Feedback message -->
+      <p id="feedback" class="text-center fw-bold"></p>
+
+      <!-- Next Riddle button -->
+      <div class="d-grid">
+        <button id="nextRiddle" class="btn btn-secondary" style="display:none;">
+          Next Riddle
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Riddle data
+    const riddles = [
+      { question: "What has keys but can't open locks?", answer: "piano" },
+      { question: "What has hands but can't clap?", answer: "clock" },
+      { question: "What can travel around the world while staying in a corner?", answer: "stamp" },
+      { question: "What has a head and a tail but no body?", answer: "coin" },
+      { question: "What gets wetter the more it dries?", answer: "towel" }
+    ];
+
+    let currentRiddleIndex = null;
+
+    // DOM elements
+    const riddleEl = document.getElementById("riddle");
+    const newBtn = document.getElementById("newRiddle");
+    const answerSection = document.getElementById("answerSection");
+    const answerInput = document.getElementById("answerInput");
+    const submitBtn = document.getElementById("submitAnswer");
+    const feedbackEl = document.getElementById("feedback");
+    const nextBtn = document.getElementById("nextRiddle");
+
+    // Show a random riddle
+    function showNewRiddle() {
+      // Pick a random index
+      currentRiddleIndex = Math.floor(Math.random() * riddles.length);
+      // Display it
+      riddleEl.textContent = riddles[currentRiddleIndex].question;
+      // Reset UI
+      feedbackEl.textContent = "";
+      feedbackEl.className = "";
+      answerInput.value = "";
+      answerSection.style.display = "block";
+      nextBtn.style.display = "none";
+    }
+
+    // Check the user's answer
+    function checkAnswer() {
+      const userAnswer = answerInput.value.trim().toLowerCase();
+      const correctAnswer = riddles[currentRiddleIndex].answer.toLowerCase();
+      if (userAnswer === correctAnswer) {
+        feedbackEl.textContent = "🎉 Correct!";
+        feedbackEl.classList.add("correct");
+      } else {
+        feedbackEl.textContent = `❌ Incorrect. The answer was "${correctAnswer}".`;
+        feedbackEl.classList.add("incorrect");
+      }
+      // Show Next button
+      nextBtn.style.display = "block";
+      // Hide submit to prevent repeated clicks
+      submitBtn.disabled = true;
+    }
+
+    // Event listeners
+    newBtn.addEventListener("click", () => {
+      showNewRiddle();
+      submitBtn.disabled = false;
+    });
+    submitBtn.addEventListener("click", checkAnswer);
+    nextBtn.addEventListener("click", showNewRiddle);
+  </script>
+</body>
+</html>
