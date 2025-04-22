@@ -146,7 +146,11 @@
       submitBtn.disabled = false;
     });
     submitBtn.addEventListener("click", checkAnswer);
-    nextBtn.addEventListener("click", showNewRiddle);
+    nextBtn.addEventListener("click", () => {
+  showNewRiddle();
+  submitBtn.disabled = false;
+});
+
   </script> 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 </body>
